@@ -2,6 +2,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
     const togglePassword = document.getElementById('togglePassword');
     const passwordField = document.getElementById('password');
+    const logoutButton = document.getElementById('logoutButton');
+
+    const token = localStorage.getItem('token');
+    if (token && window.location.pathname.endsWith('login.html')) {
+        window.location.href = 'home.html';
+    }
+
+    if (!token && window.location.pathname.endsWith('home.html')) {
+        window.location.href = 'login.html';
+    }
 
     if (loginForm) {
         loginForm.addEventListener('submit', async (event) => {
@@ -50,12 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const logoutButton = document.getElementById('logoutButton');
-
     if (logoutButton) {
         logoutButton.addEventListener('click', () => {
-            localStorage.removeItem('token'); 
-            window.location.href = 'login.html'; 
+            localStorage.removeItem('token');
+            window.location.href = 'login.html';
         });
     }
 });
